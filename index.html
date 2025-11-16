@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="left">
+        <div class="illustration">
+            <!-- Kamu bisa ganti ini dengan gambar SVG / ilustrasi lain -->
+            <img src="/assets/IllustrarionApp.png" alt="illustration">
+        </div>
+    </div>
+
+    <div class="right">
+        <h1>Welcome Back!</h1>
+
+        <form>
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="Enter your email">
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" placeholder="Enter your password">
+            </div>
+
+            <div class="form-error" id="login-error"></div>
+
+            <a href="#" class="forgot">Forgot Password?</a>
+
+            <button type="button" class="btn-login">Login</button>
+
+            <div class="separator">
+                <span>Or</span>
+            </div>
+
+            <div class="social-login">
+                <button class="google">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.5 12.2H12v3.3h5.3c-.7 2.5-2.8 4.3-5.6 4.3-3.4 0-6.2-2.8-6.2-6.3s2.8-6.3 6.2-6.3c1.6 0 3 .5 4.1 1.5l2.4-2.4C16.7 4.1 14.6 3.3 12.2 3.3 6.9 3.3 2.6 7.6 2.6 12.9s4.3 9.6 9.6 9.6c5.3 0 9.2-3.7 9.2-9.1 0-.5-.1-1.1-.1-1.2z"/>
+                    </svg>
+                    Google
+                </button>
+                <button class="facebook">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                    Facebook
+                </button>
+            </div>
+
+            <p class="signup">Don’t have an account? <a href="#">Sign Up</a></p>
+        </form>
+    </div>
+</div>
+
+</body>
+<script>
+  (function(){
+    var btn = document.querySelector('.btn-login');
+    if (!btn) return;
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var form = this.closest('form');
+      if (!form) return;
+      var emailInput = form.querySelector('input[type="email"]');
+      var passInput = form.querySelector('input[type="password"]');
+      var errorEl = form.querySelector('#login-error');
+      if (errorEl) errorEl.textContent = '';
+      var email = emailInput ? emailInput.value.trim() : '';
+      var pass = passInput ? passInput.value.trim() : '';
+      if (!email || !pass) {
+        if (errorEl) {
+          errorEl.textContent = 'Email dan password tidak boleh kosong.';
+        } else {
+          alert('Email dan password tidak boleh kosong.');
+        }
+        return;
+      }
+      alert('Login berhasil');
+      window.location.href = 'dashboard.html';
+    });
+  })();
+</script>
+</html>

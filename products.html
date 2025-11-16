@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="app">
+  <div class="layout">
+    <div class="sidebar" id="sidebar">
+      <div class="icon sidebar-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+        <span>Collapse</span>
+      </div>
+      <a href="dashboard.html" class="icon" title="Home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-6v-7h-6v7H4a1 1 0 0 1-1-1z" />
+        </svg>
+        <span>Home</span>
+      </a>
+      <a href="products.html" class="icon" title="Produk">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z" />
+        </svg>
+        <span>Produk</span>
+      </a>
+      <div class="icon logout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 17l5-5-5-5" />
+          <path d="M15 12H3" />
+          <path d="M21 3v18" opacity=".6" />
+        </svg>
+        <span>Logout</span>
+      </div>
+    </div>
+
+    <div class="main">
+      <h1>Products</h1>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-no">No</th>
+              <th>Product Name</th>
+              <th class="col-price">Price</th>
+              <th class="col-stock">Stock</th>
+              <th class="col-aksi">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="productBody"></tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+  <script defer src="js/script.js"></script>
+</body>
+</html>
