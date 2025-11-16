@@ -1,8 +1,8 @@
 # UTS Pemrograman Web
 
 - Nama dan NIM: Muhammad Zaim El Yafi (24090064)
-- Link GitHub Repository: 
-- Link GitHub Pages: 
+- Link GitHub Repository: https://github.com/xzael24/UTS-MuhammadZaimElYafi-24090064
+- Link GitHub Pages: https://xzael24.github.io/UTS-MuhammadZaimElYafi-24090064/
 - Deskripsi singkat:
 index.html - Halaman Login (validasi input, redirect ke dashboard)
 dashboard.html - Ringkasan data (Total Products, Total Sales, Total Revenue)
