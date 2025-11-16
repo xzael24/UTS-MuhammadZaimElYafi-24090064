@@ -5,12 +5,10 @@
     font-family: Arial, sans-serif;
 }
 
-/* ===== Dashboard & Products Shared Styles ===== */
 .app { background: #f5f5f5; }
 
 .layout { display: flex; }
 
-/* Sidebar */
 .sidebar {
   width: 70px;
   background: #eaeaea;
@@ -28,30 +26,25 @@
 .sidebar .icon svg { width: 20px; height: 20px; stroke: currentColor; }
 .sidebar a.icon { text-decoration: none; color: inherit; }
 
-/* Main */
 .main { flex: 1; padding: 40px; }
 
-/* Cards (dashboard) */
 .cards { display: flex; gap: 20px; }
 .card { background: white; border-radius: 10px; padding: 20px; width: 200px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
 .card .value { font-size: 24px; margin-top: 10px; font-weight: bold; }
 .card .label { display: flex; align-items: center; justify-content: center; gap: 8px; }
 .card .label svg { width: 20px; height: 20px; stroke: currentColor; }
 
-/* Table (products) */
 .table-wrap { background:#fff; border:1px solid #e5e5e5; border-radius: 8px; overflow:auto; margin-top: 20px; }
 table { width:100%; border-collapse: collapse; min-width: 640px; }
 thead th { text-align: left; font-size: 14px; color: #555; padding:12px 14px; background:#fafafa; border-bottom:1px solid #ececec; }
 tbody td { padding: 12px 14px; border-bottom:1px solid #f0f0f0; font-size: 14px; }
 tbody tr:hover { background:#fcfcfc; }
 .actions { display:flex; gap:8px; }
-/* Column helpers */
 .col-no { width: 60px; }
 .col-price { width: 140px; }
 .col-stock { width: 100px; }
 .col-aksi { width: 160px; }
 
-/* Buttons */
 .btn { padding:6px 10px; font-size: 13px; border:1px solid #d0d0d0; background:#fff; border-radius:6px; cursor:pointer; }
 .btn.edit { border-color:#a0a0a0; }
 .btn.delete { border-color:#d32f2f; color:#d32f2f; }

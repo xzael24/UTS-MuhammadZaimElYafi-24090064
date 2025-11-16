@@ -11,8 +11,7 @@
 <div class="container">
     <div class="left">
         <div class="illustration">
-            <!-- Kamu bisa ganti ini dengan gambar SVG / ilustrasi lain -->
-            <img src="/assets/IllustrarionApp.png" alt="illustration">
+            <img src="assets/IllustrarionApp.png" alt="illustration">
         </div>
     </div>
 
@@ -61,31 +60,5 @@
 </div>
 
 </body>
-<script>
-  (function(){
-    var btn = document.querySelector('.btn-login');
-    if (!btn) return;
-    btn.addEventListener('click', function(e){
-      e.preventDefault();
-      var form = this.closest('form');
-      if (!form) return;
-      var emailInput = form.querySelector('input[type="email"]');
-      var passInput = form.querySelector('input[type="password"]');
-      var errorEl = form.querySelector('#login-error');
-      if (errorEl) errorEl.textContent = '';
-      var email = emailInput ? emailInput.value.trim() : '';
-      var pass = passInput ? passInput.value.trim() : '';
-      if (!email || !pass) {
-        if (errorEl) {
-          errorEl.textContent = 'Email dan password tidak boleh kosong.';
-        } else {
-          alert('Email dan password tidak boleh kosong.');
-        }
-        return;
-      }
-      alert('Login berhasil');
-      window.location.href = 'dashboard.html';
-    });
-  })();
-</script>
+<script defer src="js/script.js"></script>
 </html>

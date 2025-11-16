@@ -1,11 +1,8 @@
-// Shared scripts for Dashboard and Products
-
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
   if (sidebar) sidebar.classList.toggle('open');
 }
 
-// Global: handle sidebar toggle via delegation (works on all pages)
 document.addEventListener('click', (e) => {
   if (e.target.closest('.sidebar-toggle')) {
     toggleSidebar();
@@ -19,12 +16,36 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Products page logic (runs only if elements exist)
 document.addEventListener('DOMContentLoaded', () => {
-  const productBody = document.getElementById('productBody');
-  if (!productBody) return; // not on products page
+  // Login page logic
+  const loginBtn = document.querySelector('.btn-login');
+  if (loginBtn) {
+    loginBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      const form = this.closest('form');
+      if (!form) return;
+      const emailInput = form.querySelector('input[type="email"]');
+      const passInput = form.querySelector('input[type="password"]');
+      const errorEl = form.querySelector('#login-error');
+      if (errorEl) errorEl.textContent = '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      const pass = passInput ? passInput.value.trim() : '';
+      if (!email || !pass) {
+        if (errorEl) {
+          errorEl.textContent = 'Email dan password tidak boleh kosong.';
+        } else {
+          alert('Email dan password tidak boleh kosong.');
+        }
+        return;
+      }
+      alert('Login berhasil');
+      window.location.href = 'dashboard.html';
+    });
+  }
 
-  // Dummy data
+  const productBody = document.getElementById('productBody');
+  if (!productBody) return;
+
   const products = [
     { id: 1, name: 'Kopi Gayo', price: 25000, stock: 50 },
     { id: 2, name: 'Teh Hitam', price: 18000, stock: 30 },
