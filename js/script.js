@@ -1,12 +1,38 @@
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
-  if (sidebar) sidebar.classList.toggle('open');
+  const overlay = document.getElementById('sidebarOverlay');
+  if (sidebar) {
+    sidebar.classList.toggle('open');
+    if (overlay) {
+      overlay.classList.toggle('active');
+    }
+  }
+}
+
+function closeSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  if (sidebar) {
+    sidebar.classList.remove('open');
+    if (overlay) {
+      overlay.classList.remove('active');
+    }
+  }
 }
 
 document.addEventListener('click', (e) => {
+  if (e.target.closest('#mobileMenuToggle')) {
+    toggleSidebar();
+  }
+  
   if (e.target.closest('.sidebar-toggle')) {
     toggleSidebar();
   }
+  
+  if (e.target.id === 'sidebarOverlay') {
+    closeSidebar();
+  }
+  
   const logoutEl = e.target.closest('.icon.logout');
   if (logoutEl) {
     const ok = confirm('Apakah Anda yakin ingin keluar?');
@@ -17,10 +43,19 @@ document.addEventListener('click', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Login page logic
+  const sidebarLinks = document.querySelectorAll('.sidebar a.icon');
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        setTimeout(() => closeSidebar(), 100);
+      }
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
   const loginBtn = document.querySelector('.btn-login');
   if (loginBtn) {
-    // Ripple effect on click
     loginBtn.addEventListener('click', (ev) => {
       const rect = loginBtn.getBoundingClientRect();
       const ripple = document.createElement('span');
@@ -33,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => ripple.remove(), 650);
     });
 
-    // Prevent other buttons from doing anything
     document.querySelectorAll('button:not(.btn-login)').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -55,14 +89,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = emailInput ? emailInput.value.trim() : '';
       const pass = passInput ? passInput.value.trim() : '';
       
-      // Reset error states
       [emailInput, passInput].forEach(el => el?.classList.remove('error'));
       
-      // Validation
       let isValid = true;
       const errors = [];
-      
-      // Check for empty fields first
       const isEmailEmpty = !email;
       const isPassEmpty = !pass;
       
@@ -71,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         passInput.classList.add('error');
         isValid = false;
       } else {
-        // Check individual fields if not both empty
         if (isEmailEmpty) {
           showError(emailInput, 'Email tidak boleh kosong');
           isValid = false;
@@ -91,13 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (!isValid) {
         form.classList.remove('shake');
-        // trigger reflow to restart animation
         form.offsetHeight;
         form.classList.add('shake');
         return;
       }
       
-      // If validation passes
       alert('Login berhasil');
       window.location.href = 'dashboard.html';
       
@@ -117,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Inject show/hide password toggle
     const passGroup = document.querySelector('.input-group input[type="password"]')?.closest('.input-group');
     const passInput = passGroup ? passGroup.querySelector('input[type="password"]') : null;
     if (passGroup && passInput && !passGroup.querySelector('.toggle-password')) {
@@ -138,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Dashboard: navigate to products from button
   const viewProductsBtn = document.querySelector('.view-products');
   if (viewProductsBtn) {
     viewProductsBtn.addEventListener('click', () => {
@@ -146,10 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Dashboard: count-up animation for card values
   const cardValues = document.querySelectorAll('.cards .value');
   if (cardValues.length) {
-    // Dummy summary data (spec)
     const summary = {
       totalProducts: 120,
       totalSales: 85,
@@ -161,9 +184,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cardValues.forEach((el, idx) => {
       const target = Number(targets[idx] || 0);
-      const isRupiah = idx === 2; // Revenue card
+      const isRupiah = idx === 2;
       el.textContent = isRupiah ? formatRupiah(0) : '0';
-      const duration = 1000; // ms
+      const duration = 1000; 
       const start = performance.now();
       const tick = (now) => {
         const p = Math.min(1, (now - start) / duration);
@@ -177,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const productBody = document.getElementById('productBody');
   if (!productBody) {
-    return; // not on products page; stop products-specific logic
+    return; 
   }
 
   const products = [
@@ -192,9 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
     maximumFractionDigits: 0,
   }).format(n);
 
-  // Products page logic
-  let sortKey = null; // 'name' | 'price' | 'stock'
-  let sortDir = 'asc'; // 'asc' | 'desc'
+  let sortKey = null; 
+  let sortDir = 'asc'; 
 
   function applySort() {
     if (!sortKey) return;
@@ -244,20 +266,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Make headers sortable
   const table = productBody.closest('table');
   const thead = table ? table.querySelector('thead') : null;
   if (thead) {
     const headerMap = [
-      { el: thead.querySelector('th:nth-child(1)'), key: null }, // No
+      { el: thead.querySelector('th:nth-child(1)'), key: null },
       { el: thead.querySelector('th:nth-child(2)'), key: 'name' },
       { el: thead.querySelector('th:nth-child(3)'), key: 'price' },
       { el: thead.querySelector('th:nth-child(4)'), key: 'stock' },
-      { el: thead.querySelector('th:nth-child(5)'), key: null }, // Aksi
+      { el: thead.querySelector('th:nth-child(5)'), key: null },
     ];
     headerMap.forEach((h) => {
       if (!h.el) return;
-      if (!h.key) return; // skip non-sortable
+      if (!h.key) return;
       h.el.classList.add('sortable');
       h.el.addEventListener('click', () => {
         if (sortKey === h.key) {
@@ -277,7 +298,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.addEventListener('click', (e) => {
-    // Ripple for icon buttons
     const iconBtn = e.target.closest('.icon-btn');
     if (iconBtn) {
       const rect = iconBtn.getBoundingClientRect();
@@ -308,7 +328,6 @@ document.addEventListener('DOMContentLoaded', () => {
         render();
       }
     }
-    // Row selection (ignore clicks on action buttons)
     const row = e.target.closest('tbody tr');
     if (row && !e.target.closest('.actions')) {
       const tbody = row.parentElement;
